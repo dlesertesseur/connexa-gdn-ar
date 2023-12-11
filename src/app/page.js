@@ -1,5 +1,6 @@
-import AppFrame from "./components/AppFrame";
+import { Title } from "@mantine/core";
+
 
 export default function Home() {
-  return (<AppFrame />);
+  return <Title>{"HOME"}</Title>;
 }

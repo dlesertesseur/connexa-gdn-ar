@@ -1,38 +1,45 @@
-"use client"
-import { useDisclosure } from '@mantine/hooks';
-import { AppShell, Burger, Group, Skeleton } from '@mantine/core';
-import Logo from './Logo';
+"use client";
+import { useDisclosure } from "@mantine/hooks";
+import { AppShell, Burger, Group } from "@mantine/core";
+import { UserButton } from "./UserButton";
+import Logo from "./Logo";
+import AppMenu from "./AppMenu";
 
-export default function AppFrame() {
-  const [mobileOpened, toggleMobile ] = useDisclosure();
-  const [desktopOpened, toggleDesktop ] = useDisclosure(true);
+export default function AppFrame({ children }) {
+  const [mobileOpened, toggleMobile] = useDisclosure();
+  const [desktopOpened, toggleDesktop] = useDisclosure(true);
 
   return (
     <AppShell
       header={{ height: 60 }}
       navbar={{
         width: 300,
-        breakpoint: 'sm',
+        breakpoint: "sm",
         collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
       }}
       padding="md"
     >
       <AppShell.Header>
-        <Group h="100%" px="md">
-          <Burger opened={mobileOpened} onClick={toggleMobile.toggle} hiddenFrom="sm" size="sm" />
-          <Burger opened={desktopOpened} onClick={toggleDesktop.toggle} visibleFrom="sm" size="sm" />
-          <Logo size={60} />
+        <Group justify="space-between" align="center" px={"xs"}>
+          <Group >
+            <Burger opened={mobileOpened} onClick={toggleMobile.toggle} hiddenFrom="sm" size="sm" />
+            <Burger opened={desktopOpened} onClick={toggleDesktop.toggle} visibleFrom="sm" size="sm" />
+          </Group>
+          <Group >
+            <Logo size={60}/>
+            {/* <Logo height={60} width={60*1.77
+            } image={"/logo/gdn.jpg"}/> */}
+          </Group>
+          <Group >
+            <UserButton/>
+          </Group>
+
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        Navbar
-        {Array(15)
-          .fill(0)
-          .map((_, index) => (
-            <Skeleton key={index} h={28} mt="sm" animate={false} />
-          ))}
-      </AppShell.Navbar>
-      <AppShell.Main>Main</AppShell.Main>
+        <AppMenu/>
+        </AppShell.Navbar>
+      <AppShell.Main>{children}</AppShell.Main>
     </AppShell>
   );
 }

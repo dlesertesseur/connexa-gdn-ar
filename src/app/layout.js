@@ -1,11 +1,9 @@
 import "@mantine/core/styles.css";
 import React from "react";
+import UserProvier from "./context/UserContext";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-
-export const metadata = {
-  title: "Connexa-GDNAR",
-  description: "Middleware connexa-gdn",
-};
+import ProtectRoute from "./components/ProtectRoute";
+import AppFrame from "./components/AppFrame";
 
 export default function RootLayout({ children }) {
   return (
@@ -13,13 +11,16 @@ export default function RootLayout({ children }) {
       <head>
         <ColorSchemeScript />
         <link rel="shortcut icon" href="/favicon.svg" />
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
-        />
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no" />
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineProvider>
+          <UserProvier>
+            <ProtectRoute>
+              <AppFrame>{children}</AppFrame>
+            </ProtectRoute>
+          </UserProvier>
+        </MantineProvider>
       </body>
     </html>
   );
