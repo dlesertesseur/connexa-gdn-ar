@@ -1,13 +1,16 @@
-"use client"
+"use client";
 import React from "react";
-import { redirect } from "next/navigation";
 import { useUserContext } from "../context/UserContext";
+import { Group } from "@mantine/core";
+import SiginForm from "./signin/SiginForm";
 
-const ProtectRoute = ({children}) => {
+const ProtectRoute = ({ children }) => {
   const { user } = useUserContext();
-  return <div>
-    {user.token ? children : redirect('/signin')}
-  </div>;
+  console.log("ProtectRoute user -> ", user);
+
+  return <Group>
+    {user?.token ? children : <SiginForm />}
+  </Group>;
 };
 
 export default ProtectRoute;
