@@ -1,11 +1,8 @@
 import { config } from "@/app/config";
 
 export async function signin(parameters) {
-  const apiUrl = `${config.SERVER}:${config.PORT}/${config.API_BASE}/authentication`;
-
-  console.log("signin parameters -> ", parameters);
-  console.log("signin apiUrl -> ", apiUrl);
-
+  const apiUrl = `${config.API_SERVER}:${config.API_PORT}${config.ADMIN_BASE}/authentication`;
+  
   const body = JSON.stringify({
     email: parameters.email,
     password: parameters.password,
@@ -21,6 +18,13 @@ export async function signin(parameters) {
   };
 
   const res = await fetch(apiUrl, requestOptions);
-  const data = await res.json();
+  let data = null;
+
+  if (res.status === 200) {
+    data = await res.json();
+  } else {
+    throw new Error(res.status);
+  }
+
   return data;
 }

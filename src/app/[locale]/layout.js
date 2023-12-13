@@ -31,7 +31,7 @@ export default async function LocaleLayout({ children, params }) {
           <UserProvier>
             <NextIntlClientProvider locale={locale} messages={messages}>
               <ProtectRoute locale={locale}>
-                <AppFrame locale={locale}>{children}</AppFrame>
+                <AppFrame>{children}</AppFrame>
               </ProtectRoute>
             </NextIntlClientProvider>
           </UserProvier>

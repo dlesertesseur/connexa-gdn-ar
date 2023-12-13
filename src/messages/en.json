@@ -1,60 +1,29 @@
 {
   "auth": {
-    "title": "Welcome back!",
-    "forgotPassword": "Forgot password?",
-    "doNotHaveAccount": "Do not have an account yet?",
-    "haveAccount": "Already have an account?",
-    "createAccount": "Create account"
+    "title": "Welcome!",
+    "forgotPassword": "I forgot my password?",
+    "doNotHaveAccount": "¿No tienes una cuenta?",
+    "haveAccount": "You do not have an account?",
+    "createAccount": "Create one",
+    "label": {
+      "email": "Email",
+      "password": "Password",
+      "language":"Language",
+      "copyright": "Copyright 2023"
+    },
+    "placeholder": {
+      "email": "an email",
+      "password": "a password"
+    },
+    "button": {
+      "signIn": "Sign in"
+    },
+    "validation": {
+      "emailFormat": "Invalid email",
+      "passwordFormat": "Invalid password"
+    }
   },
 
-  "button": {
-    "signIn": "Sign In",
-    "signUp": "Sign Up",
-    "resetPassword": "Reset Password",
-    "back": "Back",
-    "accept": "Accept",
-    "cancel": "Cancel",
-    "dashboard": "Dashboard",
-    "refresh": "Refresh",
-    "seeMore": "See more",
-    "close": "Close",
-    "uploadImage": "Upload image",
-    "upload": "Upload products",
-    "download": "Dowload products",
-    "detailBysite": "Detail by site",
-    "logout": "Logout",
-    "save": "Save",
-    "finishEditing": "Finish editing",
-    "addPart": "Add part",
-    "backImage": "Back image",
-    "pixelMeterRelation": "Pixel/Meter",
-    "deleteImage": "Delete image",
-    "addLabel": "Add label",
-    "seek": "Seek",
-    "create": "Create",
-    "createAnyway": "Create anyway",
-    "createWorkerRelation": "Connect with this organization",
-    "photos": "Photos",
-    "roles": "Roles",
-    "sites": "Sites",
-    "backStep": "Back",
-    "nextStep": "Next step",
-    "objectInspector": "Object inspector",
-    "assignNames": "Assign names",
-    "options": "Options",
-    "menu": "Menu",
-    "filters": "Filters"
-  },
-
-  "label": {
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "Email address",
-    "password": "Password",
-    "name": "Name",
-    "value": "Value"
-  },
-  
   "importations": {
     "columns": [
       "Reference",
@@ -73,16 +42,7 @@
     ],
 
     "items": {
-      "columns": [
-        "Code",
-        "Description",
-        "UPC",
-        "FOB",
-        "Unit",
-        "Amount",
-        "Price",
-        "Date"
-      ]
+      "columns": ["Code", "Description", "UPC", "FOB", "Unit", "Amount", "Price", "Date"]
     },
 
     "label": {

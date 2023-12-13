@@ -5,7 +5,7 @@ import { UserButton } from "./UserButton";
 import AppMenu from "./AppMenu";
 import Logo from "./Logo";
 
-export default function AppFrame({ children, locale }) {
+export default function AppFrame({ children }) {
   const [mobileOpened, toggleMobile] = useDisclosure();
   const [desktopOpened, toggleDesktop] = useDisclosure(true);
 

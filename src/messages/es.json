@@ -8,21 +8,21 @@
     "label": {
       "email": "Correo electronico",
       "password": "Contraseña",
+      "language":"Idioma",
       "copyright": "Copyright 2023"
     },
     "placeholder": {
       "email": "un correo electronico",
       "password": "una contraseña"
     },
-    "button":{
-      "signIn":"Ingresar"
+    "button": {
+      "signIn": "Iniciar sesión"
     },
-    "validation":{
-      "emailFormat":"Correo electronico invalido",
-      "passwordFormat":"Contraseña invalida"
+    "validation": {
+      "emailFormat": "Correo electronico invalido",
+      "passwordFormat": "Contraseña invalida"
     }
   },
-
   "importations": {
     "columns": [
       "Referencia",
