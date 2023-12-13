@@ -1,0 +1,67 @@
+{
+  "auth": {
+    "title": "¡Bienvenido!",
+    "forgotPassword": "Olvidé mi contraseña?",
+    "doNotHaveAccount": "¿No tienes una cuenta?",
+    "haveAccount": "¿Ya tienes una cuenta?",
+    "createAccount": "Crear una",
+    "label": {
+      "email": "Correo electronico",
+      "password": "Contraseña",
+      "copyright": "Copyright 2023"
+    },
+    "placeholder": {
+      "email": "un correo electronico",
+      "password": "una contraseña"
+    },
+    "button":{
+      "signIn":"Ingresar"
+    },
+    "validation":{
+      "emailFormat":"Correo electronico invalido",
+      "passwordFormat":"Contraseña invalida"
+    }
+  },
+
+  "importations": {
+    "columns": [
+      "Referencia",
+      "Producto",
+      "Analista",
+      "Evento",
+      "Pais origen",
+      "Valor",
+      "Moneda",
+      "Incoterm",
+      "FOB",
+      "Proveedor",
+      "Fecha",
+      "Requerido en CD",
+      "Canal"
+    ],
+
+    "items": {
+      "columns": ["Codigo", "Descripcion", "UPC", "FOB", "Unidad", "Cantidad", "Precio", "Fecha"]
+    },
+    "label": {
+      "outOfDate": "Vencidas",
+      "onTime": "A tiempo",
+      "notRegistered": "N/D",
+      "lastUpdate": "Última actualización",
+      "nextUpdate": "Próxima actualización",
+      "businessObjective": "Objetivo de negocio",
+      "analyst": "Analista",
+      "all": "Todos"
+    },
+
+    "filter": {
+      "title": "Seleccione los filtros"
+    }
+  },
+
+  "taskStatuses": {
+    "inactive": "Inactiva",
+    "active": "Activa",
+    "finished": "Terminada"
+  }
+}

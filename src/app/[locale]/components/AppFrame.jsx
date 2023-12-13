@@ -2,10 +2,10 @@
 import { useDisclosure } from "@mantine/hooks";
 import { AppShell, Burger, Group } from "@mantine/core";
 import { UserButton } from "./UserButton";
-import Logo from "./Logo";
 import AppMenu from "./AppMenu";
+import Logo from "./Logo";
 
-export default function AppFrame({ children }) {
+export default function AppFrame({ children, locale }) {
   const [mobileOpened, toggleMobile] = useDisclosure();
   const [desktopOpened, toggleDesktop] = useDisclosure(true);
 
