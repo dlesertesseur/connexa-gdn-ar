@@ -8,7 +8,7 @@
     "label": {
       "email": "Email",
       "password": "Password",
-      "language":"Language",
+      "language": "Language",
       "copyright": "Copyright 2023"
     },
     "placeholder": {
@@ -16,11 +16,16 @@
       "password": "a password"
     },
     "button": {
-      "signIn": "Sign in"
+      "signIn": "Sign in",
+      "signOut": "sign out"
     },
     "validation": {
       "emailFormat": "Invalid email",
       "passwordFormat": "Invalid password"
+    },
+    "errors": {
+      "title": "Error",
+      "text": "Authentication error"
     }
   },
 
@@ -40,6 +45,10 @@
       "Required in warehouse",
       "Channel"
     ],
+
+    "button":{
+      "refresh": "Refresh"
+    },
 
     "items": {
       "columns": ["Code", "Description", "UPC", "FOB", "Unit", "Amount", "Price", "Date"]

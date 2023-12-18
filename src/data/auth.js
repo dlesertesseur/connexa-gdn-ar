@@ -23,7 +23,7 @@ export async function signin(parameters) {
   if (res.status === 200) {
     data = await res.json();
   } else {
-    throw new Error(res.status);
+    throw new Error(`${res.status}`);
   }
 
   return data;

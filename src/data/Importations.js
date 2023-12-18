@@ -1,6 +1,6 @@
-import { config } from "../../../Constants/config";
+import { config } from "@/app/config";
 
-const baseUrl = config.SERVER + ":" + config.PORT + config.API_GDNAR_BASE;
+const baseUrl = config.API_SERVER + ":" + config.API_PORT + config.API_BASE;
 
 async function findAllImportations(params) {
   try {
@@ -95,7 +95,9 @@ async function findImportationsIndicatorsByStatus(params) {
 
   const event = params.event ? `&event=${params.event}` : null;
   const analyst = params.analyst ? `&analyst=${params.analyst}` : null;
-  const url = `${baseUrl}/importations/indicators?status=${params.status}${event ? event : ""}${analyst ? analyst : ""}`;
+  const url = `${baseUrl}/importations/indicators?status=${params.status}${event ? event : ""}${
+    analyst ? analyst : ""
+  }`;
 
   const res = await fetch(url, requestOptions);
   const data = await res.json();
@@ -156,7 +158,6 @@ async function findAllAnalysts(params) {
   return data;
 }
 
-
 async function findImportationsItemsByReference(params) {
   const requestOptions = {
     method: "GET",
@@ -188,5 +189,5 @@ export {
   getProcessStatus,
   findAllBusinessObjectives,
   findAllAnalysts,
-  findImportationsItemsByReference
+  findImportationsItemsByReference,
 };

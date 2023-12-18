@@ -1,19 +1,22 @@
 import React from "react";
-import ImportarionCard from "./ImportarionCard";
 import { Button, Flex, Group, ScrollArea, Stack, Text } from "@mantine/core";
 import { IconRefresh } from "@tabler/icons-react";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { HEADER_HIGHT } from "../../../../Constants";
-import { useViewportSize } from "@mantine/hooks";
-import { convertMilisegToYYYYMMDDHHMISS } from "../../../../Util";
-import ImportationFilterDialog from "./ImportationFilterDialog";
+import { convertMilisegToYYYYMMDDHHMISS } from "@/util";
+import ImportarionCard from "./ImportarionCard";
+import {getTranslations} from 'next-intl/server';
 
-const ImportationsPanel = ({ statuses, processControl, businessObjectives, analysts }) => {
-  const { height } = useViewportSize();
-  const { t } = useTranslation();
-  const [refresh, setRefresh] = useState(null);
-  const [filterOpen, setFilterOpen] = useState(false);
+const ImportationsPanel = async ({ statuses, processControl, businessObjectives, analysts }) => {
+  
+  const t = await getTranslations("importations");
+  
+  // const { height } = useViewportSize();
+  // const [refresh, setRefresh] = useState(null);
+  // const [filterOpen, setFilterOpen] = useState(false);
+  
+  // businessObjectives.unshift(t("label.all"));
+  // analysts.unshift(t("label.all"));
+
+  const height = 600;
 
   const onRefresh = (e) => {
     setRefresh(new Date());
@@ -24,7 +27,7 @@ const ImportationsPanel = ({ statuses, processControl, businessObjectives, analy
       <Group position="apart" mb={"md"}>
         {processControl ? (
           <Group position="left" align="center">
-            <ImportationFilterDialog
+            {/* <ImportationFilterDialog
               businessObjectives={businessObjectives}
               analysts={analysts}
               opened={filterOpen}
@@ -34,11 +37,10 @@ const ImportationsPanel = ({ statuses, processControl, businessObjectives, analy
               close={() => {
                 setFilterOpen(false);
               }}
-
               onRefresh={onRefresh}
-            />
+            /> */}
 
-            <Text size="md" weight={700}>{`${t("importations.label.lastUpdate")} :`}</Text>
+            <Text size="md" weight={700}>{`${t("label.lastUpdate")} :`}</Text>
             <Text align="center" c="dimmed" size="md" fw={500}>
               {convertMilisegToYYYYMMDDHHMISS(processControl?.dateAndTime)}
             </Text>
@@ -47,19 +49,19 @@ const ImportationsPanel = ({ statuses, processControl, businessObjectives, analy
 
         <Button
           size="xs"
-          leftIcon={<IconRefresh size={16} />}
-          onClick={(e) => {
-            onRefresh(e);
-          }}
+          icon={<IconRefresh size={16} />}
+          // onClick={(e) => {
+          //   onRefresh(e);
+          // }}
         >
           {t("button.refresh")}
         </Button>
       </Group>
 
-      <ScrollArea type="scroll" style={{ width: "100%", height: height - HEADER_HIGHT }}>
+      <ScrollArea type="scroll" style={{ width: "100%", height: height}}>
         <Flex wrap={"wrap"} gap={"xs"} justify="center">
           {statuses?.map((s) => (
-            <ImportarionCard key={s} status={s} lastUpdate={refresh} />
+            <ImportarionCard key={s} status={s} lastUpdate={null} />
           ))}
         </Flex>
       </ScrollArea>

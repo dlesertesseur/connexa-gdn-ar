@@ -15,19 +15,18 @@ import {
 import { useForm } from "@mantine/form";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import Logo from "../Logo";
 import { useTranslations } from "next-intl";
 import { redirect } from "next/navigation";
 import { useUserContext } from "@/app/context/UserContext";
+import Logo from "../Logo";
 
 export function SigninForm({locale}) {
   const t = useTranslations("auth");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [language, setLanguage] = useState(locale);
   const [localeSelected, setLocaleSelected] = useState(null);
 
-  const {authenticate} = useUserContext();
+  const {authenticate, error} = useUserContext();
   
   const languages = [
     { value: "es", label: "Español" },
@@ -52,7 +51,6 @@ export function SigninForm({locale}) {
 
   useEffect(() => {
     if (localeSelected) {
-      console.log("locale -> ", `/${localeSelected}`);
       redirect(`/${localeSelected}`);
     }
   }, [localeSelected]);
@@ -111,7 +109,7 @@ export function SigninForm({locale}) {
               color="red"
               variant="filled"
             >
-              {error.message}
+              {t("errors.text")}
             </Alert>
           ) : null}
 

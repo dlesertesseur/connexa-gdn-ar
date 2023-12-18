@@ -5,7 +5,7 @@ import { UserButton } from "./UserButton";
 import AppMenu from "./AppMenu";
 import Logo from "./Logo";
 
-export default function AppFrame({ children }) {
+export default function AppFrame({ children, locale }) {
   const [mobileOpened, toggleMobile] = useDisclosure();
   const [desktopOpened, toggleDesktop] = useDisclosure(true);
 
@@ -27,8 +27,6 @@ export default function AppFrame({ children }) {
           </Group>
           <Group >
             <Logo size={60}/>
-            {/* <Logo height={60} width={60*1.77
-            } image={"/logo/gdn.jpg"}/> */}
           </Group>
           <Group >
             <UserButton/>
@@ -37,7 +35,7 @@ export default function AppFrame({ children }) {
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        <AppMenu/>
+        <AppMenu locale={locale}/>
         </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
     </AppShell>

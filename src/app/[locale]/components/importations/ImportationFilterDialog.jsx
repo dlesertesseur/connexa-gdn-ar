@@ -1,13 +1,13 @@
 import React from "react";
 import { ActionIcon, Button, Group, Indicator, Popover, Select, Stack } from "@mantine/core";
-import { useTranslation } from "react-i18next";
 import { IconFilter } from "@tabler/icons-react";
-import { useImportationContext } from "../../context/ImportationContext";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
+import { useImportationContext } from "@/app/context/ImportationContext";
 
 const ImportationFilterDialog = ({ opened, open, close, businessObjectives, analysts, onRefresh }) => {
-  const { t } = useTranslation();
+  const t = useTranslations("importations");
 
   const { businessObjectiveSelected, setBusinessObjectiveSelected, analystSelected, setAnalystSelected } =
     useImportationContext();
@@ -18,6 +18,7 @@ const ImportationFilterDialog = ({ opened, open, close, businessObjectives, anal
   useEffect(() => {
     setBusinessObjectiveSelectedLocal(businessObjectiveSelected);
     setAnalystSelectedLocal(analystSelected);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [opened]);
 
   const onAccept = () => {

@@ -1,12 +1,15 @@
-import ImportationsPanel from "@/app/components/importations/ImportationsPanel";
 import React from "react";
-import { findAllAnalysts, findAllBusinessObjectives, getProcessStatus } from "@/data/Importations";
-import { Stack } from "@mantine/core";
+import { Stack, Title } from "@mantine/core";
+import { cookies } from "next/headers";
+import { findAllAnalysts, findAllBusinessObjectives, findAllImportationStatuses, getProcessStatus } from "@/data/Importations";
+import ImportationsPanel from "../../components/importations/ImportationsPanel";
 
-const Importations = async () => {
-
+const Panel = async () => {
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+  
   const params = {
-    token: user.token,
+    token: token,
   };
 
   let statuses = null;
@@ -22,14 +25,12 @@ const Importations = async () => {
 
       const events = await findAllBusinessObjectives(params);
       businessObjectives = events.filter((e) => e !== "");
-      businessObjectives.unshift(t("importations.label.all"));
-
       analysts = await findAllAnalysts(params);
       analysts = analysts.filter((e) => e !== "");
-      analysts.unshift(t("importations.label.all"));
     }
+
   } catch (error) {
-    setError(error);
+    console.log(error);
   }
 
   return (
@@ -44,4 +45,4 @@ const Importations = async () => {
   );
 };
 
-export default Importations;
+export default Panel;

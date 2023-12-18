@@ -23,7 +23,7 @@ export default async function LocaleLayout({ children, params }) {
     <html lang={locale}>
       <head>
         <ColorSchemeScript />
-        <link rel="shortcut icon" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/logo/logo192x192.png" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no" />
       </head>
       <body>
@@ -31,7 +31,7 @@ export default async function LocaleLayout({ children, params }) {
           <UserProvier>
             <NextIntlClientProvider locale={locale} messages={messages}>
               <ProtectRoute locale={locale}>
-                <AppFrame>{children}</AppFrame>
+                <AppFrame locale={locale}>{children}</AppFrame>
               </ProtectRoute>
             </NextIntlClientProvider>
           </UserProvier>

@@ -1,8 +1,8 @@
+import { useTranslations } from "next-intl";
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { createContext } from "react";
-import { useTranslation } from "react-i18next";
 
 const ImportationContext = createContext();
 
@@ -12,9 +12,9 @@ export const useImportationContext = () => {
 };
 
 const ImportationProvider = ({ children }) => {
-  const { t } = useTranslation();
-  const [businessObjectiveSelected, setBusinessObjectiveSelected] = useState(t("importations.label.all"));
-  const [analystSelected, setAnalystSelected] = useState(t("importations.label.all"));
+  const t = useTranslations("importations");
+  const [businessObjectiveSelected, setBusinessObjectiveSelected] = useState(t("label.all"));
+  const [analystSelected, setAnalystSelected] = useState(t("label.all"));
 
   return (
     <ImportationContext.Provider

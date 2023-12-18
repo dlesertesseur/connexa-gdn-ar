@@ -1,74 +1,67 @@
 import React from "react";
 import { Card, Group, Skeleton, Stack, Text, UnstyledButton } from "@mantine/core";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import {
-  findImportationStatusCount,
-  findImportationsIndicatorsByStatus,
-} from "../../../../DataAccess/Custom/DGN/Importations";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { useImportationContext } from "../../context/ImportationContext";
 import ImportationPartialValue from "./ImportationPartialValue";
 import ImportationTotalValue from "./ImportationTotalValue";
 import ImportationCurrencyValue from "./ImportationCurrencyValue";
+import { getTranslations } from "next-intl/server";
 
-const ImportarionCard = ({ status, lastUpdate }) => {
-  const { t } = useTranslation();
-  const { user } = useSelector((state) => state.auth.value);
-  const navigate = useNavigate();
-  const [count, setCount] = useState(-1);
-  const [partials, setPartials] = useState(null);
+const ImportarionCard = async ({ status, lastUpdate }) => {
 
-  const { businessObjectiveSelected, analystSelected } = useImportationContext();
+  const count = 1;
+  const partials = 2;
+  const t = await getTranslations("importations");
+  // const t = useTranslations("importations");
+  // const [count, setCount] = useState(-1);
+  // const [partials, setPartials] = useState(null);
 
-  const getData = async () => {
-    const params = {
-      token: user.token,
-      status: status,
-    };
+  // const { businessObjectiveSelected, analystSelected } = useImportationContext();
 
-    if (businessObjectiveSelected !== t("importations.label.all")) {
-      params.event = businessObjectiveSelected;
-    }
+  // const getData = async () => {
+  //   const params = {
+  //     token: user.token,
+  //     status: status,
+  //   };
 
-    if (analystSelected !== t("importations.label.all")) {
-      params.analyst = analystSelected;
-    }
+  //   if (businessObjectiveSelected !== t("importations.label.all")) {
+  //     params.event = businessObjectiveSelected;
+  //   }
 
-    setCount(0);
-    setPartials(null);
+  //   if (analystSelected !== t("importations.label.all")) {
+  //     params.analyst = analystSelected;
+  //   }
 
-    try {
-      const value = await findImportationStatusCount(params);
-      if (value.message) {
-        setError(value.message);
-      } else {
-        setCount(value);
+  //   setCount(0);
+  //   setPartials(null);
 
-        const partials = await findImportationsIndicatorsByStatus(params);
-        setPartials(partials);
-      }
-    } catch (error) {
-      // setCount("error");
-    }
-  };
+  //   try {
+  //     const value = await findImportationStatusCount(params);
+  //     if (value.message) {
+  //       setError(value.message);
+  //     } else {
+  //       setCount(value);
 
-  useEffect(() => {
-    getData();
-  }, [status, lastUpdate]);
+  //       const partials = await findImportationsIndicatorsByStatus(params);
+  //       setPartials(partials);
+  //     }
+  //   } catch (error) {
+  //     // setCount("error");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getData();
+  // }, [status, lastUpdate]);
 
   return (
     <UnstyledButton
-      onClick={(e) => {
-        const params = {
-          state: {
-            status: status,
-          },
-        };
-        navigate("importationStatusDetail", params);
-      }}
+      // onClick={(e) => {
+      //   const params = {
+      //     state: {
+      //       status: status,
+      //     },
+      //   };
+      //   navigate("importationStatusDetail", params);
+      // }}
     >
       <Card shadow="sm" padding="lg" radius="md" withBorder w={"350px"}>
         <Stack h={"240px"} align="center">
@@ -107,12 +100,12 @@ const ImportarionCard = ({ status, lastUpdate }) => {
           {partials ? (
             <Group grow position="center" align="center" w={"100%"} spacing={"xs"}>
               <ImportationPartialValue
-                title={t("importations.label.notRegistered")}
+                title={t("label.notRegistered")}
                 value={partials.withoutDateCount}
               />
-              <ImportationPartialValue title={t("importations.label.onTime")} value={partials.dateInTheFutureCount} />
+              <ImportationPartialValue title={t("label.onTime")} value={partials.dateInTheFutureCount} />
               <ImportationPartialValue
-                title={t("importations.label.outOfDate")}
+                title={t("label.outOfDate")}
                 value={partials.dateInThePastCount}
                 color={"red"}
               />

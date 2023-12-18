@@ -16,12 +16,19 @@
       "password": "una contraseña"
     },
     "button": {
-      "signIn": "Iniciar sesión"
+      "signIn": "Iniciar sesión",
+      "signOut": "Cerrar sesión",
+      "refresh": "Actualizar"
     },
     "validation": {
       "emailFormat": "Correo electronico invalido",
       "passwordFormat": "Contraseña invalida"
+    },
+    "errors":{
+      "title":"Error",
+      "text":"Error de autenticación"
     }
+
   },
   "importations": {
     "columns": [
@@ -43,6 +50,11 @@
     "items": {
       "columns": ["Codigo", "Descripcion", "UPC", "FOB", "Unidad", "Cantidad", "Precio", "Fecha"]
     },
+
+    "button":{
+      "refresh": "Actualizar"
+    },
+
     "label": {
       "outOfDate": "Vencidas",
       "onTime": "A tiempo",

@@ -1,31 +1,50 @@
 import { useUserContext } from "@/app/context/UserContext";
-import { UnstyledButton, Group, Avatar, Text, rem } from "@mantine/core";
-import { IconChevronRight } from "@tabler/icons-react";
+import { Avatar, Text, Menu, UnstyledButton, Group, Popover, Button } from "@mantine/core";
+import { IconChevronDown, IconChevronRight, IconChevronUp, IconLogout } from "@tabler/icons-react";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 export function UserButton() {
+  const { user, logOut } = useUserContext();
+  const [opened, setOpened] = useState(false);
 
-  const {user} = useUserContext();
+  const t = useTranslations("auth");
+
+  const onLogout = () => {
+    logOut();
+    setOpened(false);
+    console.log("onLogout -> ");
+  };
 
   return (
-    <UnstyledButton>
-      <Group>
-        <Avatar
-          src={`${user.urlImage}`}
-          radius="xl"
-        />
+    <Menu>
+      <Menu.Target>
+        <UnstyledButton
+          onClick={() => {
+            setOpened(!opened);
+          }}
+        >
+          <Group>
+            <Avatar src={`${user.urlImage}`} radius="xl" />
 
-        <div style={{ flex: 1 }}>
-          <Text size="sm" fw={500}>
-            {`${user.lastname}, ${user.firstname}`}
-          </Text>
+            <div style={{ flex: 1 }}>
+              <Text size="sm" fw={500}>
+                {`${user.lastname}, ${user.firstname}`}
+              </Text>
 
-          <Text c="dimmed" size="xs">
-          {`${user.email}`}
-          </Text>
-        </div>
+              <Text c="dimmed" size="xs">
+                {`${user.email}`}
+              </Text>
+            </div>
 
-        <IconChevronRight style={{ width: rem(14), height: rem(14) }} stroke={1.5} />
-      </Group>
-    </UnstyledButton>
+            {opened ? <IconChevronUp size={16} stroke={1.5}/> : <IconChevronDown size={16} stroke={1.5}/>}
+          </Group>
+        </UnstyledButton>
+      </Menu.Target>
+
+      <Menu.Dropdown>
+        <Menu.Item leftSection={<IconLogout size={16} />} onClick={onLogout}>{t("button.signOut")}</Menu.Item>
+      </Menu.Dropdown>
+    </Menu>
   );
 }

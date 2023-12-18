@@ -11,6 +11,7 @@ export const useUserContext = () => {
 const UserProvier = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [error, setError] = useState(null);
 
   const authenticate = async (parameters) => {
     try {
@@ -31,8 +32,14 @@ const UserProvier = ({ children }) => {
       const res = await fetch("/api/auth", requestOptions);
       const data = await res.json();
 
-      setUser(data.user);
-      setToken(data.token);
+      if (data.error) {
+        console.log(data);
+        setError(data.error);
+      } else {
+        setError(null);
+        setUser(data.user);
+        setToken(data.token);
+      }
 
       return data;
     } catch (error) {
@@ -40,7 +47,12 @@ const UserProvier = ({ children }) => {
     }
   };
 
-  return <UserContext.Provider value={{ user, token, authenticate }}>{children}</UserContext.Provider>;
+  const logOut = () => {
+    setError(null);
+    setUser(null);
+    setToken(null);
+  };
+  return <UserContext.Provider value={{ user, token, error, authenticate, logOut }}>{children}</UserContext.Provider>;
 };
 
 export default UserProvier;
