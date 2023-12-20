@@ -30,7 +30,7 @@ export default async function RootLayout({ dashboard, signin, params }) {
         <MantineProvider>
           <UserProvier>
             <NextIntlClientProvider locale={locale} messages={messages}>
-              <ProtectRoute signin={signin}>{dashboard}</ProtectRoute>
+              <ProtectRoute signin={signin} dashboard={dashboard}/>
             </NextIntlClientProvider>
           </UserProvier>
         </MantineProvider>

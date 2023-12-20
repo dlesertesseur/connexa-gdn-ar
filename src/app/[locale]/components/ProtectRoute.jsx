@@ -1,9 +1,9 @@
 "use client";
 import { useUserContext } from "@/app/context/UserContext";
 
-const ProtectRoute = ({ children, signin }) => {
+const ProtectRoute = ({ dashboard, signin }) => {
   const { user } = useUserContext();
-  const ret = user ? children : signin;
+  const ret = user ? dashboard : signin;
   return (ret);
 };
 
