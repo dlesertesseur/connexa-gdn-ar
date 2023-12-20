@@ -1,6 +1,6 @@
 import { useUserContext } from "@/app/context/UserContext";
-import { Avatar, Text, Menu, UnstyledButton, Group, Popover, Button } from "@mantine/core";
-import { IconChevronDown, IconChevronRight, IconChevronUp, IconLogout } from "@tabler/icons-react";
+import { Avatar, Text, Menu, UnstyledButton, Group } from "@mantine/core";
+import { IconChevronDown, IconChevronUp, IconLogout } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -25,25 +25,27 @@ export function UserButton() {
           }}
         >
           <Group>
-            <Avatar src={`${user.urlImage}`} radius="xl" />
+            <Avatar src={`${user?.urlImage}`} radius="xl" />
 
             <div style={{ flex: 1 }}>
               <Text size="sm" fw={500}>
-                {`${user.lastname}, ${user.firstname}`}
+                {`${user?.lastname}, ${user?.firstname}`}
               </Text>
 
               <Text c="dimmed" size="xs">
-                {`${user.email}`}
+                {`${user?.email}`}
               </Text>
             </div>
 
-            {opened ? <IconChevronUp size={16} stroke={1.5}/> : <IconChevronDown size={16} stroke={1.5}/>}
+            {opened ? <IconChevronUp size={16} stroke={1.5} /> : <IconChevronDown size={16} stroke={1.5} />}
           </Group>
         </UnstyledButton>
       </Menu.Target>
 
       <Menu.Dropdown>
-        <Menu.Item leftSection={<IconLogout size={16} />} onClick={onLogout}>{t("button.signOut")}</Menu.Item>
+        <Menu.Item leftSection={<IconLogout size={16} />} onClick={onLogout}>
+          {t("button.signOut")}
+        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );

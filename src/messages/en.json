@@ -74,5 +74,11 @@
     "inactive": "Inactive",
     "active": "Active",
     "finished": "Finished"
+  },
+
+  "general":{
+    "label": {
+      "loadingData":"Lading data ..."
+    }
   }
 }

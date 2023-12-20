@@ -1,13 +1,13 @@
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
-import { notFound } from "next/navigation";
-import { NextIntlClientProvider } from "next-intl";
+import "@mantine/core/styles.css";
 import UserProvier from "../context/UserContext";
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { NextIntlClientProvider } from "next-intl";
+import { notFound } from "next/navigation";
 import ProtectRoute from "./components/ProtectRoute";
-import AppFrame from "./components/AppFrame";
 
 const locales = ["es", "en"];
 
-export default async function LocaleLayout({ children, params }) {
+export default async function RootLayout({ dashboard, signin, params }) {
   const locale = params.locale;
 
   if (!locales.includes(locale)) notFound();
@@ -30,9 +30,7 @@ export default async function LocaleLayout({ children, params }) {
         <MantineProvider>
           <UserProvier>
             <NextIntlClientProvider locale={locale} messages={messages}>
-              <ProtectRoute locale={locale}>
-                <AppFrame locale={locale}>{children}</AppFrame>
-              </ProtectRoute>
+              <ProtectRoute signin={signin}>{dashboard}</ProtectRoute>
             </NextIntlClientProvider>
           </UserProvier>
         </MantineProvider>

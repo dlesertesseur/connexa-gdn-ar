@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Title } from "@mantine/core";
+import { Stack } from "@mantine/core";
 import { cookies } from "next/headers";
 import { findAllAnalysts, findAllBusinessObjectives, findAllImportationStatuses, getProcessStatus } from "@/data/Importations";
 import ImportationsPanel from "../../components/importations/ImportationsPanel";

@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const UserContext = createContext();
 
@@ -10,9 +10,18 @@ export const useUserContext = () => {
 
 const UserProvier = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    if (!user) {
+      const localUserData = localStorage.getItem("user");
+      if (localUserData) {
+        setUser(JSON.parse(localUserData));
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+ 
   const authenticate = async (parameters) => {
     try {
       const body = JSON.stringify({
@@ -37,8 +46,18 @@ const UserProvier = ({ children }) => {
         setError(data.error);
       } else {
         setError(null);
-        setUser(data.user);
-        setToken(data.token);
+
+        const obj = {
+          firstname: data.user.firstname,
+          lastname: data.user.lastname,
+          email: data.user.email,
+          urlImage: data.user.urlImage,
+        };
+
+        const ud = JSON.stringify(obj);
+        window.localStorage.setItem("user", ud);
+
+        setUser(obj);
       }
 
       return data;
@@ -47,12 +66,40 @@ const UserProvier = ({ children }) => {
     }
   };
 
+  const checkSession = async () => {
+    let active = false;
+    try {
+      const url = "/api/auth";
+      const res = await fetch(url, { cache: "no-store" });
+      const data = await res.json();
+
+      console.log("checkSession Context data -> ", data.session);
+
+      if (data.error) {
+        console.log(data);
+        setError(data.error);
+      } else {
+        setError(null);
+        if (data.session) {
+          active = true;
+        }
+      }
+
+      return active;
+    } catch (error) {
+      return error;
+    }
+  };
+
   const logOut = () => {
     setError(null);
     setUser(null);
-    setToken(null);
+    localStorage.removeItem("user");
   };
-  return <UserContext.Provider value={{ user, token, error, authenticate, logOut }}>{children}</UserContext.Provider>;
+
+  return (
+    <UserContext.Provider value={{ user, error, authenticate, checkSession, logOut }}>{children}</UserContext.Provider>
+  );
 };
 
 export default UserProvier;

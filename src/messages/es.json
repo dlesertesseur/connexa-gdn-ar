@@ -75,5 +75,12 @@
     "inactive": "Inactiva",
     "active": "Activa",
     "finished": "Terminada"
+  },
+
+  "general":{
+    "label": {
+      "loadingData":"Cargando datos ..."
+    }
   }
+
 }
